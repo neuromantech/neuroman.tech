@@ -1,230 +1,297 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NEUROMANTECH — Open-Architecture Edge Biosensing & Telemetry</title>
-  <meta name="description" content="Neuromantech is an open-architecture, edge-computed biosensing and telemetry platform — real-time biopotential capture with 100% data sovereignty and zero cloud dependency." />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            obsidian: '#05070a',
-            panel: '#0b0f16',
-            edge: '#1b2530',
-            ink: '#c9d4e0',
-            muted: '#6b7c8f',
-            glow: '#2bffb0',
-            cyan: '#38e1ff',
-            warn: '#ffb454',
-            danger: '#ff5c7a',
-          },
-          fontFamily: {
-            mono: ['"JetBrains Mono"', 'monospace'],
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-          },
-        },
-      },
-    };
-  </script>
-  <style>
-    html { scroll-behavior: smooth; }
-    body { background: radial-gradient(1200px 600px at 50% -10%, #0c1620 0%, #05070a 60%); }
-    .glow-text { text-shadow: 0 0 18px rgba(43,255,176,0.35); }
-    .hairline { border-color: #1b2530; }
-    .scan::before {
-      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 50;
-      background: repeating-linear-gradient(0deg, rgba(43,255,176,0.025) 0px, rgba(43,255,176,0.025) 1px, transparent 1px, transparent 3px);
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEUROMANTECH — Open-Architecture Edge Biosensing & Telemetry</title>
+<meta property="og:title" content="NEUROMANTECH — Real-time biopotential capture. Zero cloud.">
+<meta property="og:description" content="Open-architecture, edge-computed biosensing and telemetry platform. 100% offline, local-loop biopotential infrastructure.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://neuroman.tech/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050505;
+    --bg-card: #0a0d0b;
+    --fg: #d8dedb;
+    --fg-dim: #8a9490;
+    --cyan: #00ff9d;
+    --cyan-dim: rgba(0,255,157,.35);
+    --amber: #e8a04c;
+    --line: #1a201d;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,.012) 0 1px, transparent 1px 3px);
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 28px; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  /* ── status bar ─────────────────────── */
+  .statusbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 0; font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .statusbar .brand { color: var(--cyan); font-weight: 700; text-shadow: 0 0 12px var(--cyan-dim); }
+  .pulse { display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--cyan); box-shadow: 0 0 8px var(--cyan);
+    margin-right: 8px; animation: pulse 2.2s ease-in-out infinite; vertical-align: 1px; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
+
+  /* ── hero ───────────────────────────── */
+  .hero { padding: 88px 0 40px; }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 12.5px;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--cyan);
+    margin-bottom: 26px;
+  }
+  h1 {
+    font-size: clamp(38px, 6vw, 60px); font-weight: 700; line-height: 1.08;
+    letter-spacing: -.02em; margin-bottom: 26px;
+  }
+  h1 .accent { color: var(--cyan); text-shadow: 0 0 22px var(--cyan-dim); }
+  .hero p { max-width: 620px; color: var(--fg-dim); font-size: 18px; margin-bottom: 38px; }
+  .hero p strong { color: var(--fg); font-weight: 500; }
+
+  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-bottom: 54px; }
+  .btn {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase; text-decoration: none;
+    padding: 14px 24px; border-radius: 4px; transition: all .18s ease;
+    display: inline-block;
+  }
+  .btn-primary { background: var(--cyan); color: #03110a; }
+  .btn-primary:hover { box-shadow: 0 0 26px var(--cyan-dim); transform: translateY(-1px); }
+  .btn-ghost { border: 1px solid var(--line); color: var(--fg-dim); }
+  .btn-ghost:hover { border-color: var(--cyan-dim); color: var(--cyan); }
+
+  /* ── waveform ───────────────────────── */
+  .wave-shell { border: 1px solid var(--line); border-radius: 6px; background: var(--bg-card);
+    overflow: hidden; margin-bottom: 90px; }
+  .wave-head { display: flex; justify-content: space-between; padding: 10px 16px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--fg-dim); border-bottom: 1px solid var(--line); }
+  .wave-head .live { color: var(--cyan); }
+  canvas { display: block; width: 100%; height: 150px; }
+
+  /* ── sections ───────────────────────── */
+  section { padding: 64px 0; border-top: 1px solid var(--line); }
+  .sec-label { font-family: 'JetBrains Mono', monospace; font-size: 12.5px;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--amber); margin-bottom: 22px; }
+  h2 { font-size: 26px; font-weight: 700; letter-spacing: -.01em; margin-bottom: 18px; }
+  section p { color: var(--fg-dim); max-width: 680px; }
+  section p strong, section p b { color: var(--fg); font-weight: 500; }
+  .comment { font-family: 'JetBrains Mono', monospace; font-size: 12.5px;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--cyan); margin-bottom: 14px; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 30px; }
+  @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+  .card { border: 1px solid var(--line); border-radius: 6px; background: var(--bg-card); padding: 22px 24px; }
+  .card h3 { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--cyan); margin-bottom: 10px; font-weight: 700; }
+  .card p { font-size: 15px; }
+
+  /* ── timeline ───────────────────────── */
+  .timeline { margin-top: 34px; position: relative; padding-left: 28px; }
+  .timeline::before { content: ''; position: absolute; left: 6px; top: 6px; bottom: 6px;
+    width: 1px; background: var(--line); }
+  .tl-item { position: relative; padding-bottom: 30px; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-dot { position: absolute; left: -26px; top: 7px; width: 9px; height: 9px; border-radius: 50%; }
+  .tl-done .tl-dot { background: var(--cyan); box-shadow: 0 0 8px var(--cyan-dim); }
+  .tl-active .tl-dot { background: var(--amber); box-shadow: 0 0 8px rgba(232,160,76,.5);
+    animation: pulse 1.8s ease-in-out infinite; }
+  .tl-queued .tl-dot { background: transparent; border: 1px solid var(--fg-dim); }
+  .tl-meta { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .14em;
+    text-transform: uppercase; margin-bottom: 4px; }
+  .tl-done .tl-meta { color: var(--cyan); }
+  .tl-active .tl-meta { color: var(--amber); }
+  .tl-queued .tl-meta { color: var(--fg-dim); }
+  .tl-item p { font-size: 15px; }
+
+  /* ── quote ──────────────────────────── */
+  blockquote {
+    border-left: 2px solid var(--cyan); padding: 6px 0 6px 24px; margin: 26px 0 22px;
+    font-size: 19px; font-style: italic; color: var(--fg); max-width: 660px;
+  }
+
+  /* ── footer ─────────────────────────── */
+  footer { border-top: 1px solid var(--line); padding: 26px 0 46px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--fg-dim);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  footer a { color: var(--cyan); text-decoration: none; }
+  footer a:hover { text-shadow: 0 0 10px var(--cyan-dim); }
+</style>
 </head>
-<body class="scan font-sans text-ink antialiased min-h-screen">
-  <div class="max-w-5xl mx-auto px-5 sm:px-8 py-10">
+<body>
+<div class="wrap">
 
-    <!-- HEADER -->
-    <header class="flex items-center justify-between border-b hairline pb-5 mb-12">
-      <div class="font-mono text-lg tracking-[0.35em] font-bold text-glow glow-text">NEUROMANTECH</div>
-      <div class="flex items-center gap-2 font-mono text-xs text-glow">
-        <span class="w-2 h-2 rounded-full bg-glow animate-pulse"></span>
-        LOCAL LOOP ACTIVE
-      </div>
-    </header>
-
-    <!-- HERO -->
-    <section class="mb-20">
-      <p class="font-mono text-cyan text-xs tracking-widest mb-4">// OPEN-ARCHITECTURE · EDGE-COMPUTED · BIOSENSING &amp; TELEMETRY</p>
-      <h1 class="font-mono font-bold leading-tight text-4xl sm:text-6xl mb-6">
-        Real-time biopotential<br />
-        capture. <span class="text-glow glow-text">Zero cloud.</span>
-      </h1>
-      <p class="text-muted text-lg max-w-2xl leading-relaxed">
-        Neuromantech is an open-architecture, edge-computed biosensing and telemetry
-        platform. We build high-fidelity hardware and software infrastructure that captures
-        real-time biopotential signals — EEG, EMG, and peripheral physiological data —
-        without relying on cloud dependencies or persistent remote tracking.
-      </p>
-      <div class="mt-8 flex flex-wrap gap-3 font-mono text-sm">
-        <a href="https://neuroman.tech" class="px-4 py-2 border hairline rounded hover:border-glow hover:text-glow transition">neuroman.tech</a>
-        <a href="https://neuroman.store" class="px-4 py-2 border hairline rounded hover:border-glow hover:text-glow transition">neuroman.store</a>
-        <a href="mailto:dev@neuroman.tech" class="px-4 py-2 border hairline rounded hover:border-glow hover:text-glow transition">dev@neuroman.tech</a>
-      </div>
-    </section>
-
-    <!-- EXECUTIVE SUMMARY -->
-    <section class="mb-16">
-      <h2 class="font-mono text-glow text-sm tracking-widest mb-4">01 — EXECUTIVE SUMMARY</h2>
-      <div class="border hairline rounded-lg bg-panel/60 p-6 sm:p-8">
-        <p class="leading-relaxed text-ink/90">
-          Neuromantech is an open-architecture, edge-computed <strong class="text-glow">biosensing and
-          telemetry platform</strong>. We are building a high-fidelity hardware and software
-          infrastructure that captures real-time biopotential signals (such as EEG, EMG, and
-          peripheral physiological data) without relying on cloud dependencies or persistent
-          remote tracking.
-        </p>
-        <div class="mt-6 grid sm:grid-cols-3 gap-4 font-mono text-sm">
-          <div class="border hairline rounded p-4">
-            <div class="text-muted text-xs mb-1">TECH HUB</div>
-            <div class="text-glow">neuroman.tech</div>
-          </div>
-          <div class="border hairline rounded p-4">
-            <div class="text-muted text-xs mb-1">HARDWARE PORTAL</div>
-            <div class="text-glow">neuroman.store</div>
-          </div>
-          <div class="border hairline rounded p-4">
-            <div class="text-muted text-xs mb-1">CONTACT</div>
-            <div class="text-glow">dev@neuroman.tech</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- THE CORE PROBLEM -->
-    <section class="mb-16">
-      <h2 class="font-mono text-danger text-sm tracking-widest mb-4">02 — THE CORE PROBLEM</h2>
-      <div class="grid sm:grid-cols-2 gap-5">
-        <div class="border hairline rounded-lg bg-panel/60 p-6">
-          <div class="font-mono text-warn text-xs mb-3">// LOW DATA FIDELITY &amp; HIGH NOISE</div>
-          <p class="leading-relaxed text-ink/90">
-            Environmental electrical noise (50 Hz / 60 Hz mains hum) and physiological
-            interference (muscle activity or eye blinks) degrade raw biosignals, making
-            downstream analysis unreliable.
-          </p>
-        </div>
-        <div class="border hairline rounded-lg bg-panel/60 p-6">
-          <div class="font-mono text-danger text-xs mb-3">// PRIVACY &amp; DATA EXPLOITATION</div>
-          <p class="leading-relaxed text-ink/90">
-            Existing consumer biosensors typically force cloud sync, locking raw user data
-            behind proprietary black-box APIs or selling sensitive biometric profiles.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- SYSTEM ARCHITECTURE -->
-    <section class="mb-16">
-      <h2 class="font-mono text-cyan text-sm tracking-widest mb-4">03 — SYSTEM ARCHITECTURE &amp; SOLUTION</h2>
-      <p class="text-muted mb-6 max-w-2xl leading-relaxed">
-        Neuromantech delivers a <strong class="text-ink">100% offline, local-loop ecosystem</strong>
-        that processes biopotential telemetry directly at the hardware layer.
-      </p>
-      <div class="grid sm:grid-cols-2 gap-5">
-        <div class="border hairline rounded-lg bg-panel/60 p-6">
-          <div class="font-mono text-glow text-xs mb-2">OFFLINE EDGE PROCESSING</div>
-          <p class="text-ink/90 leading-relaxed">
-            Firmware runs on low-power microcontrollers (ESP32 / nRF52 series) to compute,
-            filter, and output data locally.
-          </p>
-        </div>
-        <div class="border hairline rounded-lg bg-panel/60 p-6">
-          <div class="font-mono text-glow text-xs mb-2">ACTIVE DSP CONDITIONING</div>
-          <p class="text-ink/90 leading-relaxed">
-            Digital Signal Processing routines strip out environmental noise, muscular tension
-            artifacts, and motion interference before data serialization.
-          </p>
-        </div>
-        <div class="border hairline rounded-lg bg-panel/60 p-6">
-          <div class="font-mono text-glow text-xs mb-2">OPEN &amp; PLAIN-TEXT TELEMETRY</div>
-          <p class="text-ink/90 leading-relaxed">
-            Outputs raw frequency band-power distributions (Alpha, Beta, Theta, Gamma) and
-            timing markers in transparent, human-readable formats.
-          </p>
-        </div>
-        <div class="border hairline rounded-lg bg-panel/60 p-6">
-          <div class="font-mono text-glow text-xs mb-2">MODULAR INTEGRATION</div>
-          <p class="text-ink/90 leading-relaxed">
-            Designed to interface seamlessly with custom peripheral devices, haptic feedback
-            loops, and local AI engines.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- DEPLOYMENT ROADMAP -->
-    <section class="mb-16">
-      <h2 class="font-mono text-glow text-sm tracking-widest mb-4">04 — DEPLOYMENT ROADMAP</h2>
-      <div class="border hairline rounded-lg overflow-hidden">
-        <table class="w-full text-left font-mono text-sm">
-          <thead class="bg-panel/80 text-muted">
-            <tr>
-              <th class="px-5 py-3 font-normal">PHASE</th>
-              <th class="px-5 py-3 font-normal">MILESTONE</th>
-              <th class="px-5 py-3 font-normal">STATUS</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-[#1b2530]">
-            <tr class="bg-panel/40">
-              <td class="px-5 py-4 text-glow">PHASE 0</td>
-              <td class="px-5 py-4 text-ink/90">Brand lock, DNS routing (neuroman.tech / neuroman.store), and GitHub Org setup</td>
-              <td class="px-5 py-4"><span class="text-glow">COMPLETED</span></td>
-            </tr>
-            <tr>
-              <td class="px-5 py-4 text-cyan">PHASE 1</td>
-              <td class="px-5 py-4 text-ink/90">Prototype component delivery, bench testing, and DSP firmware validation</td>
-              <td class="px-5 py-4"><span class="text-cyan">IN PROGRESS</span></td>
-            </tr>
-            <tr class="bg-panel/40">
-              <td class="px-5 py-4 text-muted">PHASE 2</td>
-              <td class="px-5 py-4 text-ink/90">Developer seed testing, open-source SDK releases, and research access</td>
-              <td class="px-5 py-4"><span class="text-muted">QUEUED</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- ACCELERATOR VALUE PROP -->
-    <section class="mb-20">
-      <h2 class="font-mono text-warn text-sm tracking-widest mb-4">05 — ACCELERATOR VALUE PROPOSITION</h2>
-      <div class="border hairline rounded-lg bg-panel/60 p-6 sm:p-8">
-        <p class="font-mono text-xs text-muted mb-4">// PLUS EIGHT PRE-ACCELERATOR SPRINT · CLOSING JUL 20, 2026</p>
-        <blockquote class="border-l-2 border-glow pl-5 text-lg sm:text-xl leading-relaxed text-ink/95 italic">
-          "We provide the open, edge-computed biosensing framework that allows hardware
-          developers and clinical researchers to build real-time biometric tools with
-          100% data sovereignty and zero cloud dependency."
-        </blockquote>
-        <p class="mt-5 text-muted leading-relaxed">
-          Neuromantech positions itself as a <strong class="text-ink">foundational infrastructure layer</strong> —
-          the open, local-first substrate that lets builders ship real-time biometric tools
-          without surrendering raw signal data to the cloud.
-        </p>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="border-t hairline pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-mono text-xs text-muted">
-      <div>© 2026 NEUROMANTECH SYSTEMS</div>
-      <div class="flex items-center gap-2 text-glow">
-        <span class="w-2 h-2 rounded-full bg-glow animate-pulse"></span>
-        LOCAL LOOP ACTIVE
-      </div>
-      <a href="mailto:dev@neuroman.tech" class="hover:text-glow transition">dev@neuroman.tech</a>
-    </footer>
-
+  <div class="statusbar">
+    <span class="brand">NEUROMANTECH</span>
+    <span><span class="pulse"></span>LOCAL LOOP ACTIVE</span>
   </div>
+
+  <header class="hero">
+    <div class="eyebrow">// Open-architecture · Edge-computed · Biosensing &amp; telemetry</div>
+    <h1>Real-time biopotential capture.<br><span class="accent">Zero cloud.</span></h1>
+    <p>Neuromantech is building the <strong>open, local-first substrate</strong> for biosignal infrastructure — high-fidelity EEG, EMG, and peripheral physiological telemetry, processed at the edge with <strong>100% data sovereignty</strong>.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="mailto:dev@neuroman.tech?subject=Investor%20deck%20request">Request the deck →</a>
+      <a class="btn btn-ghost" href="https://neuroman.store/">neuroman.store</a>
+      <a class="btn btn-ghost" href="mailto:dev@neuroman.tech">dev@neuroman.tech</a>
+    </div>
+
+    <div class="wave-shell">
+      <div class="wave-head">
+        <span>CH1 · CH2 · CH3 — raw biopotential, DSP-conditioned</span>
+        <span class="live">● STREAMING — LOCAL ONLY</span>
+      </div>
+      <canvas id="wave"></canvas>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-label">01 — The core problem</div>
+    <h2>Biosignals are noisy. The cloud is a leash.</h2>
+    <div class="grid2">
+      <div class="card">
+        <h3>// Low data fidelity &amp; high noise</h3>
+        <p>Mains hum (50/60 Hz), muscle artifacts and eye blinks degrade raw biosignals, making downstream analysis unreliable.</p>
+      </div>
+      <div class="card">
+        <h3>// Privacy &amp; data exploitation</h3>
+        <p>Consumer biosensors force cloud sync — raw biometric profiles locked behind black-box APIs, or sold.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">02 — System architecture</div>
+    <h2>A 100% offline, local-loop ecosystem.</h2>
+    <p>Biopotential telemetry processed directly at the hardware layer.</p>
+    <div class="grid2">
+      <div class="card"><h3>Offline edge processing</h3><p>Firmware on low-power MCUs (ESP32 / nRF52) computes, filters and outputs data locally.</p></div>
+      <div class="card"><h3>Active DSP conditioning</h3><p>DSP routines strip environmental noise, muscular tension artifacts and motion interference before serialization.</p></div>
+      <div class="card"><h3>Open plain-text telemetry</h3><p>Raw band-power distributions (Alpha, Beta, Theta, Gamma) and timing markers in transparent, human-readable formats.</p></div>
+      <div class="card"><h3>Modular integration</h3><p>Interfaces with custom peripherals, haptic feedback loops and local AI engines.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">03 — Deployment roadmap</div>
+    <h2>Where we are.</h2>
+    <div class="timeline">
+      <div class="tl-item tl-done">
+        <span class="tl-dot"></span>
+        <div class="tl-meta">Phase 0 — Completed</div>
+        <p>Brand lock, DNS routing (neuroman.tech / neuroman.store), GitHub Org setup.</p>
+      </div>
+      <div class="tl-item tl-active">
+        <span class="tl-dot"></span>
+        <div class="tl-meta">Phase 1 — In progress</div>
+        <p>Prototype component delivery, bench testing, DSP firmware validation.</p>
+      </div>
+      <div class="tl-item tl-queued">
+        <span class="tl-dot"></span>
+        <div class="tl-meta">Phase 2 — Queued</div>
+        <p>Developer seed testing, open-source SDK releases, research access.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">04 — Why now</div>
+    <div class="comment">// Plus Eight pre-accelerator sprint · closing Jul 20, 2026</div>
+    <blockquote>"We provide the open, edge-computed biosensing framework that lets hardware developers and clinical researchers build real-time biometric tools with 100% data sovereignty and zero cloud dependency."</blockquote>
+    <p>Neuromantech is the <strong>foundational infrastructure layer</strong> — the open, local-first substrate that lets builders ship real-time biometric tools without surrendering raw signal data to the cloud.</p>
+  </section>
+
+  <footer>
+    <span>© 2026 Neuromantech Systems</span>
+    <span><span class="pulse"></span>Local loop active</span>
+    <span><a href="https://neuroman.store/">store</a> · <a href="mailto:dev@neuroman.tech">dev@neuroman.tech</a></span>
+  </footer>
+
+</div>
+
+<script>
+const cv = document.getElementById('wave');
+const ctx = cv.getContext('2d');
+let W, H, dpr;
+function resize() {
+  dpr = window.devicePixelRatio || 1;
+  W = cv.clientWidth; H = cv.clientHeight;
+  cv.width = W * dpr; cv.height = H * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+window.addEventListener('resize', resize);
+resize();
+
+// simple deterministic noise
+function n(x) { return Math.sin(x * 12.9898) * 43758.5453 % 1; }
+
+const traces = [
+  { amp: 26, f1: 0.030, f2: 0.011, speed: 1.0, alpha: 0.95, glow: 14, yOff: 0.00 },
+  { amp: 14, f1: 0.052, f2: 0.019, speed: 1.6, alpha: 0.30, glow: 0,  yOff: -0.22 },
+  { amp: 10, f1: 0.021, f2: 0.043, speed: 0.7, alpha: 0.22, glow: 0,  yOff: 0.24 },
+];
+
+let t = 0;
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+
+  // faint grid
+  ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+  ctx.lineWidth = 1;
+  for (let x = 0; x < W; x += 48) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+  for (let y = 0; y < H; y += 30) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+
+  const mid = H / 2;
+  for (const tr of traces) {
+    ctx.beginPath();
+    ctx.strokeStyle = `rgba(0,255,157,${tr.alpha})`;
+    ctx.lineWidth = tr.glow ? 1.8 : 1.1;
+    ctx.shadowColor = 'rgba(0,255,157,0.6)';
+    ctx.shadowBlur = tr.glow;
+    const cy = mid + tr.yOff * H;
+    for (let x = 0; x <= W; x += 2) {
+      const env = 0.55 + 0.45 * Math.sin((x * 0.004) + t * 0.4); // slow amplitude envelope
+      const spike = Math.abs(n(Math.floor((x + t * 220) / 90))) > 0.985 ? tr.amp * 1.8 : 0;
+      const y = cy
+        + Math.sin(x * tr.f1 + t * 2.2 * tr.speed) * tr.amp * env
+        + Math.sin(x * tr.f2 + t * 3.7 * tr.speed) * tr.amp * 0.5
+        + spike;
+      x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+  }
+  ctx.shadowBlur = 0;
+
+  // band labels
+  ctx.font = '10px "JetBrains Mono", monospace';
+  ctx.fillStyle = 'rgba(138,148,144,0.7)';
+  ctx.fillText('δ 0.5–4', 12, 16);
+  ctx.fillText('θ 4–8', 12, 32);
+  ctx.fillText('α 8–13', 12, 48);
+  ctx.fillText('β 13–30', 12, 64);
+  ctx.fillText('γ 30+', 12, 80);
+
+  t += 0.016;
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
 </body>
 </html>
