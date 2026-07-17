@@ -1,69 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Neuroman — <!-- TODO: real tagline --></title>
-  <meta name="description" content="<!-- TODO: real meta description for neuroman.tech -->" />
-  <link rel="stylesheet" href="style.css" />
+  <title>NEUROMANTECH — Closed-Loop Biosensing &amp; Telemetry Frameworks</title>
+  <meta name="description" content="Neuromantech develops open, edge-computed biopotential filtering pipelines and local-loop telemetry infrastructure." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#0B0B0C',
+            panel: '#111114',
+            terminal: '#00FF66',
+            cyber: '#00E5FF',
+          },
+          fontFamily: {
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background-color: #0B0B0C; }
+    .glow { text-shadow: 0 0 12px rgba(0,255,102,0.45); }
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(0,255,102,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,102,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+  </style>
 </head>
-<body>
-  <header class="site-header">
-    <nav class="nav" aria-label="Primary">
-      <a class="brand" href="#top">neuroman<span class="brand-dot">.tech</span></a>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">☰</button>
-      <ul id="nav-menu" class="nav-menu">
-        <li><a href="#about">About</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+<body class="font-sans text-zinc-300 antialiased">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 border-b border-terminal/20 bg-obsidian/80 backdrop-blur">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <a href="#top" class="font-mono text-lg font-bold tracking-tight text-terminal glow">[NEUROMANTECH]</a>
+      <nav class="hidden gap-8 font-mono text-sm text-zinc-400 md:flex">
+        <a href="#system" class="transition hover:text-terminal">System</a>
+        <a href="#architecture" class="transition hover:text-terminal">Architecture</a>
+        <a href="#roadmap" class="transition hover:text-terminal">Roadmap</a>
+        <a href="#contact" class="transition hover:text-terminal">Contact</a>
+      </nav>
+      <a href="mailto:dev@neuroman.tech" class="hidden font-mono text-sm text-cyber hover:underline md:inline">dev@neuroman.tech</a>
+    </div>
   </header>
 
-  <main id="top">
-    <section class="hero reveal">
-      <h1><!-- TODO: real headline -->Build the future, faster.</h1>
-      <p class="lede"><!-- TODO: real subhead -->neuroman.tech is a placeholder landing page. Swap this copy for the real thing.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="#contact">Get started</a>
-        <a class="btn btn-ghost" href="#features">Learn more</a>
-      </div>
+  <main id="top" class="grid-bg">
+    <!-- Hero -->
+    <section id="system" class="mx-auto max-w-6xl px-6 py-24 md:py-32">
+      <span class="inline-block border border-terminal/40 bg-terminal/10 px-3 py-1 font-mono text-xs uppercase tracking-widest text-terminal">STAGE 0 PRE-PLANNING // BENCH ASSEMBLY</span>
+      <h1 class="mt-6 max-w-3xl font-mono text-4xl font-bold leading-tight text-white md:text-6xl">
+        Closed-Loop Biosensing &amp; Telemetry Frameworks.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg text-zinc-400">
+        Developing open, edge-computed biopotential filtering pipelines and local-loop telemetry infrastructure.
+      </p>
     </section>
 
-    <section id="about" class="section reveal">
-      <h2>About</h2>
-      <p><!-- TODO: real about paragraph -->This is placeholder copy. Describe what neuroman.tech does, who it's for, and why it matters.</p>
-    </section>
-
-    <section id="features" class="section reveal">
-      <h2>Features</h2>
-      <div class="cards">
-        <article class="card">
-          <h3><!-- TODO: feature 1 title -->Fast</h3>
-          <p><!-- TODO: feature 1 body -->Placeholder description for the first feature.</p>
+    <!-- Architecture -->
+    <section id="architecture" class="mx-auto max-w-6xl px-6 py-16">
+      <h2 class="mb-10 font-mono text-2xl font-bold text-white">// SYSTEM ARCHITECTURE</h2>
+      <div class="grid gap-6 md:grid-cols-3">
+        <article class="rounded-xl border border-zinc-800 bg-panel p-6 transition hover:border-terminal/50">
+          <h3 class="font-mono text-lg font-bold text-terminal">100% Offline Edge Computing</h3>
+          <p class="mt-3 text-sm text-zinc-400">Raw biosignals are filtered and processed locally on-chip (ESP32/nRF52 series). Zero automated cloud sync or external persistent tracking.</p>
         </article>
-        <article class="card">
-          <h3><!-- TODO: feature 2 title -->Flexible</h3>
-          <p><!-- TODO: feature 2 body -->Placeholder description for the second feature.</p>
+        <article class="rounded-xl border border-zinc-800 bg-panel p-6 transition hover:border-terminal/50">
+          <h3 class="font-mono text-lg font-bold text-terminal">Active Signal Conditioning</h3>
+          <p class="mt-3 text-sm text-zinc-400">Integrated DSP routines strip 50Hz/60Hz mains hum, EMG muscle artifacts, and ocular noise prior to data serialization.</p>
         </article>
-        <article class="card">
-          <h3><!-- TODO: feature 3 title -->Reliable</h3>
-          <p><!-- TODO: feature 3 body -->Placeholder description for the third feature.</p>
+        <article class="rounded-xl border border-zinc-800 bg-panel p-6 transition hover:border-terminal/50">
+          <h3 class="font-mono text-lg font-bold text-terminal">Open Telemetry Pipeline</h3>
+          <p class="mt-3 text-sm text-zinc-400">Human-readable metric exports and raw band-power distribution analysis for independent researchers and hardware developers.</p>
         </article>
       </div>
     </section>
 
-    <section id="contact" class="section reveal">
-      <h2>Contact</h2>
-      <p><!-- TODO: real contact line -->Reach us at hello@neuroman.tech (placeholder).</p>
-      <a class="btn btn-primary" href="mailto:hello@neuroman.tech">Email us</a>
+    <!-- Roadmap -->
+    <section id="roadmap" class="mx-auto max-w-6xl px-6 py-16">
+      <h2 class="mb-10 font-mono text-2xl font-bold text-white">// DEPLOYMENT ROADMAP</h2>
+      <div class="overflow-x-auto rounded-xl border border-zinc-800">
+        <table class="w-full text-left font-mono text-sm">
+          <thead class="bg-panel text-zinc-400">
+            <tr>
+              <th class="px-6 py-4">PHASE</th>
+              <th class="px-6 py-4">OBJECTIVE</th>
+              <th class="px-6 py-4">STATUS</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-zinc-800">
+            <tr>
+              <td class="px-6 py-4 text-white">Phase 0</td>
+              <td class="px-6 py-4 text-zinc-400">Core Architecture &amp; DNS Infrastructure</td>
+              <td class="px-6 py-4 text-terminal">COMPLETED</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-white">Phase 1</td>
+              <td class="px-6 py-4 text-zinc-400">Component Sourcing &amp; Bench Validation</td>
+              <td class="px-6 py-4 text-cyber">IN PROGRESS</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 text-white">Phase 2</td>
+              <td class="px-6 py-4 text-zinc-400">Developer Seed Testing &amp; Onboarding</td>
+              <td class="px-6 py-4 text-zinc-500">QUEUED</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="mx-auto max-w-6xl px-6 py-16">
+      <h2 class="mb-6 font-mono text-2xl font-bold text-white">// CONTACT &amp; INQUIRIES</h2>
+      <p class="max-w-2xl text-zinc-400">
+        Developer onboarding is currently paused pending Phase 1 hardware bench validation. We remain open to angel investor and research collaborator inquiries.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a href="mailto:dev@neuroman.tech" class="rounded-lg border border-terminal bg-terminal/10 px-6 py-3 font-mono text-sm font-bold text-terminal transition hover:bg-terminal/20">INITIATE CONTACT →</a>
+        <a href="https://github.com/neuromantech" target="_blank" rel="noopener" class="rounded-lg border border-zinc-700 px-6 py-3 font-mono text-sm text-zinc-300 transition hover:border-cyber hover:text-cyber">github.com/neuromantech</a>
+      </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <p>© <span id="year"></span> neuroman.tech — placeholder footer.</p>
+  <footer class="border-t border-zinc-800 bg-obsidian">
+    <div class="mx-auto flex max-w-6xl flex-col gap-2 px-6 py-8 font-mono text-xs text-zinc-500 md:flex-row md:items-center md:justify-between">
+      <span>© 2026 NEUROMANTECH SYSTEMS. ALL RIGHTS RESERVED.</span>
+      <span class="flex items-center gap-2"><span class="h-2 w-2 animate-pulse rounded-full bg-terminal"></span> LOCAL LOOP ACTIVE</span>
+    </div>
   </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
