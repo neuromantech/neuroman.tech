@@ -96,6 +96,9 @@
   .tb-right{display:flex;gap:10px;align-items:center;color:var(--dim);}
   .tb-right .clock{color:var(--green);}
   .glyph{padding:0 2px;}
+  @media (max-width:640px){
+    .tb-center,.tb-right .glyph{display:none;}
+  }
   .term{
     max-width:920px;margin:22px auto 0;
     border:1px solid var(--green);
